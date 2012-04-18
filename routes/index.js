@@ -3,10 +3,6 @@ var mongo = require('mongodb')
 		
 var db = new mongo.Db('text_detection', new mongo.Server('localhost', 27017, {auto_reconnect: true}), {native_parser : true});
 
-exports.index = function(req, res) {
-  res.render('index', { title: 'Grasp Android Text Detection' });
-};
-
 exports.upload = function(req, res) {
   var name = req.files.file.name;
   var gs = mongo.GridStore(db, name, 'w');
@@ -29,12 +25,12 @@ exports.upload = function(req, res) {
 };
 
 exports.retrieve = function(req, res) {
-	var name = req.headers.filename;  
-	var gs = mongo.GridStore(db, name, 'r');
-	gs.open(function(err, gs){
-		if(err) {
-			res.send(err);
-		} else {
+  var name = req.headers.filename;  
+  var gs = mongo.GridStore(db, name, 'r');
+  gs.open(function(err, gs){
+    if(err) {
+      res.send(err);
+    } else {
       gs.read(function(err, data){
         if(err) {
           res.send(err);
@@ -43,7 +39,7 @@ exports.retrieve = function(req, res) {
           res.end(data, 'binary');
         }
         gs.close(function(){});
-      })
+      });
 		}
 	});
 }

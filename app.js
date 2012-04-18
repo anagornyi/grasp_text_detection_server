@@ -25,11 +25,9 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/', routes.index);
-
 app.get('/retrieve', routes.retrieve);
 
-app.post('/', routes.upload);
+app.post('/uploads', routes.upload);
 
 http.createServer(app).listen(3000);
 

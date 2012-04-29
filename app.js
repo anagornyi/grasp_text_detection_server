@@ -6,6 +6,7 @@
 var express = require('express')
   , routes = require('./routes')
   , http = require('http');
+ 
 
 var app = express();
 
@@ -29,6 +30,6 @@ app.get('/retrieve', routes.retrieve);
 
 app.post('/uploads', routes.upload);
 
-http.createServer(app).listen(3000);
+http.createServer(app).listen(80);
 
-console.log("Express server listening on port 3000");
+console.log("Express server listening on port 80");
